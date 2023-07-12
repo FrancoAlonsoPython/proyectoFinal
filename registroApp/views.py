@@ -10,7 +10,8 @@ def signup(request):
     else:
         form = UserRegisterForm()
     
-    return render(request, 'signup.html', {'form': form})
+    return render(request,  'registroApp/signup.html', {'form': form})
 
 def signup_success(request):
     return render(request, 'signup_success.html')
+
