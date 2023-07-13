@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm,UserCreationForm
+#from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm,UserCreationForm
 #from FutbolMundial.models import CustomUser
 
 #class UserRegisterForm(UserCreationForm):

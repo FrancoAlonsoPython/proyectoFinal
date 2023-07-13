@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.urls import reverse
 from .forms import UserRegisterForm
 
 def signup(request):
@@ -6,12 +7,12 @@ def signup(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('registroApp:signup_success')
+            return redirect ('registroApp:signup_success')  
     else:
         form = UserRegisterForm()
     
-    return render(request,  'registroApp/signup.html', {'form': form})
+    return render(request, 'registroApp/signup.html', {'form': form})
 
 def signup_success(request):
-    return render(request, 'signup_success.html')
+    return render(request, 'registroApp/signup_success.html')
 
