@@ -1,18 +1,40 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.urls import reverse
-from .forms import UserRegisterForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate 
+from registroApp.forms import UserRegisterForm
+from django.contrib.auth import login
+from django.shortcuts import redirect
+from FutbolMundial.views import *
+from FutbolMundial.urls import *
+
+def login_request(request):
+
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+
+            user = authenticate(request, username=usuario, password=contra)
+            if user is not None:
+                login(request, user)
+                return redirect('FutbolMundial:menu')  
+            else:
+                return render(request, "registroApp/login/login.html", {"mensaje": "Error, datos incorrectos"})
+        else:
+            return render(request, "menu.html", {"form": form})
+    else:
+        form = AuthenticationForm()
+    return render(request, "registroApp/login/login.html", {"form": form})
+
 
 def signup(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect ('registroApp:signup_success')  
+            return redirect('registroApp:login')
     else:
         form = UserRegisterForm()
-    
-    return render(request, 'registroApp/signup.html', {'form': form})
 
-def signup_success(request):
-    return render(request, 'registroApp/signup_success.html')
-
+    return render(request, 'registroApp/signup/signup.html', {'form': form})

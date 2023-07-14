@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de usuario</title>
+</head>
+<body>
+    <h1>Registro de usuario</h1>
+    
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    
+    <form method="post" action="{% url 'registroApp:signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Registrarse">
+    </form>
+</body>
+</html>
