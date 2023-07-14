@@ -8,4 +8,3 @@ from .models import Registro
 admin.site.register(Autores)
 admin.site.register(Comentario)
 admin.site.register(LogEntry)
-admin.site.register(Registro)

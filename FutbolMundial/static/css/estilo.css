@@ -53,3 +53,7 @@ textarea{
     resize: none;
     width: 70%;
 }
+.contenido{
+    margin-top: 100px ;
+    padding: 20px;
+}

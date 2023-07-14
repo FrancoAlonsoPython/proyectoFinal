@@ -1,14 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate
+
 from registroApp.forms import UserRegisterForm
-from django.contrib.auth import login
-from django.shortcuts import redirect
-from FutbolMundial.views import *
-from FutbolMundial.urls import *
 
-def login_request(request):
-
+def login_view(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -18,14 +14,14 @@ def login_request(request):
             user = authenticate(request, username=usuario, password=contra)
             if user is not None:
                 login(request, user)
-                return redirect('FutbolMundial:menu')  
+                return render(request , "menu.html")
             else:
                 return render(request, "registroApp/login/login.html", {"mensaje": "Error, datos incorrectos"})
         else:
             return render(request, "menu.html", {"form": form})
     else:
         form = AuthenticationForm()
-    return render(request, "registroApp/login/login.html", {"form": form})
+        return render(request, "registroApp/login/login.html", {"form": form})
 
 
 def signup(request):
