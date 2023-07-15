@@ -12,4 +12,6 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('logout/', LogoutView.as_view(template_name="registroApp/login/login.html"), name="Logout"),
     path('inicio/', inicio, name = "Inicio"),
+    path('perfil/', perfilview, name="perfil"),
+    path('perfil/editarPerfil/', editarPerfil, name="editarPerfil"),
     ]

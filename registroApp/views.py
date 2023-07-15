@@ -1,36 +1,44 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
-
-from registroApp.forms import UserRegisterForm
+from registroApp.forms import CustomUserCreationForm
+from .models import CustomUser
+from django.contrib.auth.decorators import login_required
 
 def login_view(request):
-    if request.method == "POST":
+    if request.method == "GET":
+        form = AuthenticationForm()
+        return render(request, "registroApp/login/login.html", {'form': form})
+    else:
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            usuario = form.cleaned_data.get('username')
-            contra = form.cleaned_data.get('password')
-
-            user = authenticate(request, username=usuario, password=contra)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request , "menu.html")
-            else:
-                return render(request, "registroApp/login/login.html", {"mensaje": "Error, datos incorrectos"})
-        else:
-            return render(request, "menu.html", {"form": form})
-    else:
-        form = AuthenticationForm()
-        return render(request, "registroApp/login/login.html", {"form": form})
+                return redirect('menu')  
+        return render(request, "menu.html", {'form': form, 'error': 'Nombre de usuario o contraseña incorrectos'})
 
 
 def signup(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+    if request.method == 'GET':
+        return render(request, 'registroApp/signup/signup.html', {'form': CustomUserCreationForm()})
+    elif request.method == 'POST':
+        form = CustomUserCreationForm (request.POST)
         if form.is_valid():
             form.save()
             return redirect('registroApp:login')
-    else:
-        form = UserRegisterForm()
+        else:
+            return render(request, 'registroApp/signup/signup.html', {
+                'form' : CustomUserCreationForm(),
+                "error": "Contraseña incorrecta o usuario existente"
+            })
+        
+@login_required
+def perfilview(request):
+    user = request.user
+    return render(request, 'registroApp/perfil/perfil.html', {'user': user})
 
-    return render(request, 'registroApp/signup/signup.html', {'form': form})
+def editarPerfil(request):
+    return render(request, 'registroApp/perfil/editarPerfil.html')   

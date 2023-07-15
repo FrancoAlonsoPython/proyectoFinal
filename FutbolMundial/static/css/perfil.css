@@ -1,5 +1,5 @@
 .textoprincipal{
-    color: rgb(3, 10, 10);
+    color: rgb(0, 0, 0);
     text-align: center;
     margin: 5rem;
     padding: 5rem;
@@ -43,6 +43,6 @@
     border-radius: 4px;
 }
 .contenido{
-    margin-top: 500px ;
+    margin-top: 100px ;
     padding: 20px;
 }

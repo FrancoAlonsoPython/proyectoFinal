@@ -10,6 +10,9 @@
     <title>Login Futbol Mundial</title>
 </head>
 <body>
+
+    {{error}}
+    
     <div class="containerForm"> 
         <form action="{% url 'registroApp:login' %}" method="POST" class="formLogin"> {% csrf_token %}
             <h3 style="color: white; font-weight:bold; margin-bottom: 30px; display: flex; justify-content: center; align-items: center;">LOGIN</h3>
@@ -23,7 +26,7 @@
                 <button class="btn btn-primary" type="submit">Login</button>
             </div>
             {% if error %}
-                <p style="color: red;">{{error}}</p>
+                <p style="color: rgb(7, 3, 3);">{{error}}</p>
             {% endif %}
             <p style="color: white;">No tienes una cuenta? <a href="{% url 'registroApp:signup' %}">Registrate</a></p>
         </form>

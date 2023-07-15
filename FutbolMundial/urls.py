@@ -10,8 +10,6 @@ urlpatterns = [
     path('blog/' , blog, name = "blog"),
     path('contacto/', contacto, name = "contacto"),
     path('LeerAutor/',LeerAutor, name = "LeerAutor"),
-    #path('login/', login_request, name="Login"),
-    #path('registro/', register, name='Registro'),
     path('logout/', LogoutView.as_view(template_name='registroApp/login/login.html'), name='Logout'),
     path('<int:pk>', AutorDetalle.as_view(), name='Detail'),
     path('borar/<int:pk>', AutorDelete.as_view(), name='Delete'),
@@ -21,8 +19,7 @@ urlpatterns = [
     path('autor/list/', AutorList.as_view(), name='autor_list'),
     path('sobreMi/', sobreMi, name= "sobreMi"),
     path('pages/<int:pageId>/', page_detail, name='page_detail'),
+    path('login/', auth_views.LoginView.as_view(template_name='registroApp/login/login.html'), name='login'),
     path('perfil/', perfilview, name="perfil"),
     path('perfil/editarPerfil/', editarPerfil, name="editarPerfil"),
-    path('login/', auth_views.LoginView.as_view(template_name='registroApp/login/login.html'), name='login'),
-
 ] 

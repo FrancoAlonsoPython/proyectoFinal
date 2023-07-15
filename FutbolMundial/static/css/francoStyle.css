@@ -1,5 +1,5 @@
 .textoprincipal{
-    color: rgb(3, 10, 10);
+    color: rgb(0, 0, 0);
     text-align: center;
     margin: 5rem;
     padding: 5rem;
@@ -13,6 +13,8 @@
     height: 100% ;
     width: 100% ;
     background-image: url("../assets/img/images.jfif");
+    background-repeat: inherit;
+    
 }
 
 .formLogin{

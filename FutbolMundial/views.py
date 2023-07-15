@@ -18,6 +18,7 @@ def page_detail(request, pageId):
     page = Page.objects.get(id=pageId)
     return render(request, 'page_detail.html', {'page': page})
 
+
 def menu(request):
     return render(request, 'menu.html')
 
@@ -116,8 +117,8 @@ class AutorDelete(DeleteView):
     success_url = "/FutbolMundial/autor/list"
 
 def perfilview(request):
-    return render(request, 'perfil/perfil.html')
-
+    users = CustomUser.objects.all()
+    return render(request, 'registroApp/perfil/perfil.html', {'users': users})
 
 def editarPerfil(request):
-    return render(request, 'perfil/editarPerfil.html')
+    return render(request, 'registroApp/perfil/editarPerfil.html')   

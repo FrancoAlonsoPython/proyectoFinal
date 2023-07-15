@@ -2,13 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from registroApp.models import CustomUser
 
-
-
-class UserRegisterForm(UserCreationForm):
+class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField()
 
-    class Meta:
+    class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2']
-        REQUIRED_FIELDS = ['email']
-
+        fields = UserCreationForm.Meta.fields + ('email',)
